@@ -1,5 +1,8 @@
 package rebac.check_relation
 
+# default to a closed system (deny by default)
+default allowed = false
+
 # resource context is expected in the following form:
 # {
 #   "relation": "relation name",
@@ -17,7 +20,7 @@ allowed {
       "object_type": input.resource.object_type
     },
     "subject": {
-      "key": user.key,
+      "key": input.user.key,
       "type": "user"
     }
   })

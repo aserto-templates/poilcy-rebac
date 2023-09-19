@@ -1,5 +1,8 @@
 package rebac.check_permission
 
+# default to a closed system (deny by default)
+default allowed = false
+
 # resource context is expected in the following form:
 # {
 #   "permission": "permission name",
@@ -16,7 +19,7 @@ allowed {
       "name": input.resource.permission
     },
     "subject": {
-      "key": user.key,
+      "key": input.user.key,
       "type": "user"
     }
   })
