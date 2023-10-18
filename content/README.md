@@ -9,7 +9,7 @@ A policy that exposes the Aserto Directory built-ins as OPA rules.
 `src/.manifest` contains the policy roots - in this case, `rebac`. If you change the name of the `package` definitions in the `.rego` files, make sure that the first component of the package name is reflected in this list.
 
 `src/policies` contains the policy modules:
-
+* rebac.check.rego - calls the `ds.check_relation` built-in, with the calling user as the subject, `input.resource.relation` as the relation name, `input.resource.object_type` as the object type, and `input.resource.object_key` as the key. This will be updated to use the new `ds.check` built-in when it is available. 
 * rebac.check_permission.rego - calls the `ds.check_permission` built-in, with the calling user as the subject, `input.resource.permission` as the permission name, `input.resource.object_type` as the object type, and `input.resource.object_key` as the key.
 * rebac.check_relation.rego - calls the `ds.check_relation` built-in, with the calling user as the subject, `input.resource.relation` as the relation name, `input.resource.object_type` as the object type, and `input.resource.object_key` as the key.
 
