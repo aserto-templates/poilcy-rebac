@@ -4,6 +4,20 @@
     "required_builtins": {
       "builtin1": [
         {
+          "name": "ds.check",
+          "decl": {
+            "args": [
+              {
+                "type": "any"
+              }
+            ],
+            "result": {
+              "type": "boolean"
+            },
+            "type": "function"
+          }
+        },
+        {
           "name": "ds.check_permission",
           "decl": {
             "args": [

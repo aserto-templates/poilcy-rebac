@@ -7,21 +7,14 @@ default allowed = false
 # {
 #   "relation": "relation name",
 #   "object_type": "object type that carries the relation",
-#   "object_key": "key of object instance with type of object_type"
+#   "object_id": "id of object instance with type of object_type"
 # }
 allowed {
   ds.check_relation({
-    "object": {
-      "key": input.resource.object_key,
-      "type": input.resource.object_type
-    },
-    "relation": {
-      "name": input.resource.relation,
-      "object_type": input.resource.object_type
-    },
-    "subject": {
-      "key": input.user.key,
-      "type": "user"
-    }
+    "object_type": input.resource.object_type,
+    "object_id": input.resource.object_id,
+    "relation": input.resource.relation,
+    "subject_type": "user",
+    "subject_id": input.user.id
   })
 }
