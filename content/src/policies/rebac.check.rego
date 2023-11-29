@@ -10,18 +10,11 @@ default allowed = false
 #   "object_id": "id of object instance with type of object_type"
 # }
 allowed {
-  ds.check_relation({
-    "object": {
-      "key": input.resource.object_id,
-      "type": input.resource.object_type
-    },
-    "relation": {
-      "name": input.resource.relation,
-      "object_type": input.resource.object_type
-    },
-    "subject": {
-      "key": input.user.key,
-      "type": "user"
-    }
+  ds.check({
+    "object_type": input.resource.object_type,
+    "object_id": input.resource.object_id,
+    "relation": input.resource.relation,
+    "subject_type": "user",
+    "subject_id": input.user.id
   })
 }

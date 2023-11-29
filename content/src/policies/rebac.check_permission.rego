@@ -7,20 +7,14 @@ default allowed = false
 # {
 #   "permission": "permission name",
 #   "object_type": "object type that carries the permission",
-#   "object_key": "key of object instance with type of object_type"
+#   "object_id": "id of object instance with type of object_type"
 # }
 allowed {
   ds.check_permission({
-    "object": {
-      "key": input.resource.object_key,
-      "type": input.resource.object_type
-    },
-    "permission": {
-      "name": input.resource.permission
-    },
-    "subject": {
-      "key": input.user.key,
-      "type": "user"
-    }
+    "object_type": input.resource.object_type,
+    "object_id": input.resource.object_id,
+    "permission": input.resource.permission,
+    "subject_type": "user",
+    "subject_id": input.user.id
   })
 }
