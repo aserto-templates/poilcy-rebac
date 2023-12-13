@@ -31,6 +31,12 @@ jobs:
         docker_username: ${{ steps.template-config.outputs.username }}
         docker_password: ${{ secrets.ASERTO_TEMPLATE_PUBLISH_KEY }}
 
+    - name: Setup oras 1.1.0
+      uses: oras-project/setup-oras@v1
+      with:
+        version: 1.1.0
+      id: "oras-setup"
+
     - name: Oras Login
       id: "oras-login"
       env:
@@ -57,6 +63,7 @@ jobs:
        while read -r tag; do
           oras push "${SERVER}/${REPO}:${tag}" \
           --annotation-file ./annotations.json \
+          --config ./config.json \
           --artifact-type application/vnd.oci.image.layer.v1.tar+gzip ./bundle.tar.gz
         done < <(echo "${{ steps.sver.outputs.version }}")
 
