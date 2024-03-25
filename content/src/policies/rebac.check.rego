@@ -1,7 +1,5 @@
 package rebac.check
 
-import future.keywords.if
-
 # default to a closed system (deny by default)
 default allowed = false
 default subject_type = "user"
@@ -18,7 +16,7 @@ default subject_type = "user"
 # * set 'identity_context.type' to 'IDENTITY_TYPE_MANUAL'.
 # * set `identity_context.identity` to the subject ID.
 # * set `resource_context.subject_type` to the subject type.
-allowed {
+allowed if {
   ds.check({
     "object_type": input.resource.object_type,
     "object_id": input.resource.object_id,
@@ -38,4 +36,3 @@ subject_type := input.resource.subject_type if {
 subject_id := input.identity.identity if {
     input.identity.type == "IDENTITY_TYPE_MANUAL"
 } else := input.user.id
-
