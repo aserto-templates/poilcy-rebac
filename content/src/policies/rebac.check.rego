@@ -2,29 +2,18 @@ package rebac.check
 
 # default to a closed system (deny by default)
 default allowed = false
-
-# subject type is 'user' by default.
 default subject_type = "user"
 
 # When using IDENTITY_TYPE_MANUAL, the subject type comes from the resource context.
-subject_type := x {
-	input.identity.type == "IDENTITY_TYPE_MANUAL"
-	input.resource.subject_type
-	x := input.resource.subject_type
+subject_type := input.resource.subject_type if {
+    input.identity.type == "IDENTITY_TYPE_MANUAL"
+    input.resource.subject_type != ""
 }
 
 # When using IDENTITY_TYPE_MANUAL, the subject ID comes from the identity context.
-subject_id := x {
-	input.identity.type == "IDENTITY_TYPE_MANUAL"
-	x := input.identity.identity
-}
-
-# When using IDENTITY_TYPE_SUB or IDENTITY_TYPE_JWT, the subject ID is the user's ID.
-subject_id := x {
-	input.identity.type != "IDENTITY_TYPE_MANUAL"
-	input.user.id
-	x := input.user.id
-}
+subject_id := input.identity.identity if {
+    input.identity.type == "IDENTITY_TYPE_MANUAL"
+} else := input.user.id
 
 # resource context is expected in the following form:
 # {
