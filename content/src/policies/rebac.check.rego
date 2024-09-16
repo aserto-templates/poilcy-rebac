@@ -4,17 +4,6 @@ package rebac.check
 default allowed = false
 default subject_type = "user"
 
-# When using IDENTITY_TYPE_MANUAL, the subject type comes from the resource context.
-subject_type := input.resource.subject_type if {
-    input.identity.type == "IDENTITY_TYPE_MANUAL"
-    input.resource.subject_type != ""
-}
-
-# When using IDENTITY_TYPE_MANUAL, the subject ID comes from the identity context.
-subject_id := input.identity.identity if {
-    input.identity.type == "IDENTITY_TYPE_MANUAL"
-} else := input.user.id
-
 # resource context is expected in the following form:
 # {
 #   "relation": "relation or permission name",
@@ -36,3 +25,15 @@ allowed {
     "subject_id": subject_id
   })
 }
+
+# When using IDENTITY_TYPE_MANUAL, the subject type comes from the resource context.
+subject_type := input.resource.subject_type if {
+    input.identity.type == "IDENTITY_TYPE_MANUAL"
+    input.resource.subject_type != ""
+}
+
+# When using IDENTITY_TYPE_MANUAL, the subject ID comes from the identity context.
+subject_id := input.identity.identity if {
+    input.identity.type == "IDENTITY_TYPE_MANUAL"
+} else := input.user.id
+
