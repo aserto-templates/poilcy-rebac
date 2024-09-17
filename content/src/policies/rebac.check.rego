@@ -1,5 +1,7 @@
 package rebac.check
 
+import future.keywords.if
+
 # default to a closed system (deny by default)
 default allowed = false
 default subject_type = "user"
