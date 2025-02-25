@@ -10,8 +10,8 @@ default subject_type = "user"
 # {
 #   "relation": "relation or permission name",
 #   "object_type": "object type that carries the relation or permission",
-#   "object_id": "id of object instance with type of object_type"
-#   "subject_type": "[optional] subject type accessing the object. default is 'user'",
+#   "object_id": "id of object instance with type of object_type",
+#   "subject_type": "[optional] subject type accessing the object. default is 'user'"
 # }
 #
 # To perform ReBAC checks with a subject that is not a user:
